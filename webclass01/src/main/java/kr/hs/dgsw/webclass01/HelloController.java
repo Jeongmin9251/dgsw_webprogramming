@@ -2,53 +2,45 @@
 package kr.hs.dgsw.webclass01;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import kr.hs.dgsw.webclass01.calculator.CalculatorService;
 
 @RestController
 public class HelloController {
-    @GetMapping
-    public String hello() {
-        return "hello world";
-    }
+    @Autowired
+    private CalculatorService cs;
 
     @GetMapping("/calculator1")
-    public int calculator1(@RequestParam int num1, @RequestParam int num2, @RequestParam String oper) {
-        int res = 0;
-        switch (oper) {
+    public int calculator1(@RequestParam int num1, @RequestParam int num2, @RequestParam String sign) {
+        int result = 0;
+        switch (sign) {
             case "+":
-                res = num1 + num2;
+                result = num1 + num2;
                 break;
             case "-":
-                res = num1 - num2;
+                result = num1 - num2;
                 break;
             case "*":
-                res = num1 * num2;
+                result = num1 * num2;
                 break;
             case "/":
-                res = num1 / num2;
+                result = num1 / num2;
                 break;
         }
 
-        return res;
+        return result;
     }
 
-    @GetMapping("/calculator2/{n1}/{oper}/{n2}")
-    public int calculator2(@PathVariable String n1, @PathVariable String n2, @PathVariable String oper) {
-        int res = 0;
-        switch (oper) {
-            case "+":
-                res = Integer.parseInt(n1) + Integer.parseInt(n2);
-                break;
-            case "-":
-                res = Integer.parseInt(n1) - Integer.parseInt(n2);
-                break;
-            case "*":
-                res = Integer.parseInt(n1) * Integer.parseInt(n2);
-                break;
-            case "/":
-                res = Integer.parseInt(n1) / Integer.parseInt(n2);
-                break;
+    /*@GetMapping("/calculator2/{num1}/{sign}/{num2}")
+    public String calculator2(@PathVariable String num1, @PathVariable String num2, @PathVariable String sign) {
+
+        String result = cs.validation(num1, num2, sign);
+        System.out.println(result);
+        if(result == "OK") { 
+            return "결과값: " + cs.calculator(num1, num2, sign); 
         }
-
-        return res;
-    }
+        else { 
+            return result; 
+        }
+    }*/
 }
