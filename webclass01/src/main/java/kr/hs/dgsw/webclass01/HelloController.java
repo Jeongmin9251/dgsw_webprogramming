@@ -30,17 +30,4 @@ public class HelloController {
 
         return result;
     }
-
-    /*@GetMapping("/calculator2/{num1}/{sign}/{num2}")
-    public String calculator2(@PathVariable String num1, @PathVariable String num2, @PathVariable String sign) {
-
-        String result = cs.validation(num1, num2, sign);
-        System.out.println(result);
-        if(result == "OK") { 
-            return "결과값: " + cs.calculator(num1, num2, sign); 
-        }
-        else { 
-            return result; 
-        }
-    }*/
 }
