@@ -1,11 +1,10 @@
 package kr.hs.dgsw.webclass02.Repository;
 
-import java.util.Optional;
-
+import kr.hs.dgsw.webclass02.Domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import kr.hs.dgsw.webclass02.Domain.User;
+import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 }

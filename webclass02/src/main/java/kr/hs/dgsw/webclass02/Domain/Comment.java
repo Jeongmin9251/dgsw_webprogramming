@@ -1,26 +1,23 @@
 package kr.hs.dgsw.webclass02.Domain;
 
-
-import java.time.LocalDateTime;
-
-import javax.persistence.GeneratedValue;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Id;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
-@NoArgsConstructor // public Comment(){}
+@NoArgsConstructor // public Comment() {}
 public class Comment {
     @Id
     @GeneratedValue
-    private long id;
-    private long userId;
+    private Long id;
+    private Long userId;
     private String content;
     @CreationTimestamp
     private LocalDateTime created;
@@ -29,14 +26,13 @@ public class Comment {
     private String storedPath;
     private String originalName;
 
-    public Comment(long userId, String comment, String storedPath, String originalName){
+    public Comment(Long userId, String content, String storedPath, String originalName) {
         this.userId = userId;
-        this.content = comment;
+        this.content = content;
         this.storedPath = storedPath;
         this.originalName = originalName;
     }
-
-    public Comment(Comment c){
+    public Comment(Comment c) {
         this.id = c.getId();
         this.userId = c.getUserId();
         this.content = c.getContent();

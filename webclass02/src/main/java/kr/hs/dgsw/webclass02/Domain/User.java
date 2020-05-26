@@ -1,24 +1,22 @@
 package kr.hs.dgsw.webclass02.Domain;
 
-import java.time.LocalDateTime;
-
-import javax.annotation.Generated;
-import javax.persistence.Entity;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Id;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 public class User {
     @Id
-    @Generated
-    private long id;
+    @GeneratedValue
+    private Long id;
     private String username;
     private String email;
     private String password;
@@ -29,7 +27,7 @@ public class User {
     private String storedPath;
     private String originalName;
 
-    public User(String username, String email, String password, String storedPath, String originalName){
+    public User(String username, String email, String password, String storedPath, String originalName) {
         this.username = username;
         this.email = email;
         this.password = password;

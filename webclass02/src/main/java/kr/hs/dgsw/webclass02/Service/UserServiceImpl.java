@@ -1,28 +1,29 @@
 package kr.hs.dgsw.webclass02.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import kr.hs.dgsw.webclass02.Domain.User;
+import kr.hs.dgsw.webclass02.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
-
     @Override
     public User add(User user) {
         Optional<User> found = userRepository.findByEmail(user.getEmail());
-        if (found.isPresent())
-            return null;
+        if (found.isPresent()) return null;
         return userRepository.save(user);
     }
 
     @Override
     public User login(String email, String password) {
         Optional<User> user = userRepository.findByEmail(email);
-        if(user.isPresent()) {
-            if(user.get().getPassword().equals(password)) return user.get();
+        if (user.isPresent()) {
+            if (user.get().getPassword().equals(password)) return user.get();
         }
         return null;
     }
@@ -30,14 +31,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(Long id, User user) {
         return userRepository.findById(id)
-        .map(found -> {
-            found.setUsername(Optional.ofNullable(user.getUsername()).orElse(found.getUsername()));
-            found.setEmail(Optional.ofNullable(user.getEmail()).orElse(found.getEmail()));
-            found.setOriginalName(Optional.ofNullable(user.getOriginalName()).orElse(found.getOriginalName()));
-            found.setStoredPath(Optional.ofNullable(user.getStoredPath()).orElse(found.getStoredPath()));
-            return userRepository.save(found);
-        })
-        .orElse (null);
+                .map(found -> {
+                    found.setUsername(Optional.ofNullable(user.getUsername()).orElse(found.getUsername()));
+                    found.setEmail(Optional.ofNullable(user.getEmail()).orElse(found.getEmail()));
+                    found.setOriginalName(Optional.ofNullable(user.getOriginalName()).orElse(found.getOriginalName()));
+                    found.setStoredPath(Optional.ofNullable(user.getStoredPath()).orElse(found.getStoredPath()));
+                    return userRepository.save(found);
+                })
+                .orElse(null);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
         try {
             userRepository.deleteById(id);
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -60,5 +61,4 @@ public class UserServiceImpl implements UserService {
     public List<User> list() {
         return userRepository.findAll();
     }
-    
 }
