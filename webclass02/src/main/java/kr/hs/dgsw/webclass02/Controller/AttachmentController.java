@@ -82,9 +82,8 @@ public class AttachmentController {
 
             InputStream is = new BufferedInputStream(new FileInputStream(file));
             FileCopyUtils.copy(is, res.getOutputStream());
-
-    } catch(Exception e) {
-        System.out.println(e.getMessage());
-    }
-}  
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }  
 }
